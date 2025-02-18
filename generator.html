@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantasy Name Generator</title>
+    <style>
+        html{
+            scroll-behavior: smooth;
+        }
+        body {
+            font: small-caps bold 20px sans-serif;
+            margin: 20px;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+            transition: 250ms;
+        }
+        a:hover{
+            color: rgb(255, 63, 63);
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        select, button {
+            width: 75%;
+            padding: 10px;
+            margin: 20px 75px 0px 75px;
+            transition: 250ms;
+            font-weight: 700;
+        }
+        button{
+            border: none;
+        }
+        button:hover{
+            color: white;
+            border: none;
+            border-radius: 5px;
+            background-color: rgb(201, 164, 235);
+        }
+        #nameOutput{
+            font-size: 60px;
+            margin: 10px 75px 70px 75px;
+            height: 100px;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" style="margin-top: 120px;">
+        <a href="" onclick="copyToClipboard()"><p id="nameOutput" style="font-size: 70px;">Fantasy Name Generator</p></a>
+        <div class="output">
+             <select id="style">
+                <option value="fantasy">Fantasy</option>
+                <option value="scifi">Science fiction</option>
+                <option value="medieval">Middle Ages</option>
+                <option value="random">Random</option>
+            </select>
+            <button onclick="generateName()" class="purple">Another one</button>
+        </div>
+    </div>
+</body>
+<script>
+    const fantasyNames = ["Elrindor", "Silvana", "Galadriel", "Aragorn", "Legolas", "Eldarion", "Morwenna", "Dragenmar", "Eirissel", "Vargran", "Tielia", "Zarton", "Lirelle", "Faendor", "Keldoris"];
+    const scifiNames = ["Zortac", "Neila", "Kyle", "Lyra", "Jax", "Zentaurus 9", "Neira Xel", "Tronex", "Velion-42", "Cyberra", "Argomed", "Silectra", "Drayson Vir", "Mechatron", "Altarius"];
+    const medievalNames = ["Henry", "Margaret", "William", "Eleanor", "Richard", "Godfried", "Reynald", "Isolde", "Wilhelm", "Alistria", "Roland", "Beatrice", "Ludwig", "Gisela", "Otto"];
+    function getRandomElement(array){
+        return array[Math.floor(Math.random() * array.length)];
+    }
+    function generateName(){
+        const style = document.getElementById('style').value;
+        let name;
+        if (style === 'fantasy'){
+            name = getRandomElement(fantasyNames);
+        }else if (style === 'scifi'){
+            name = getRandomElement(scifiNames);
+        }else if (style === 'medieval'){
+            name = getRandomElement(medievalNames);
+        }else if (style === 'random'){
+            consonnants = [
+				'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 
+				'n', 'p', 'r', 's', 't', 'th', 'v', 'x', 'z'];
+			vowels = ['a', 'au', 'e', 'i', 'o', 'ou', 'u', 'y'];
+
+			nname = "";
+			length = Math.floor(Math.random() * 3) + 2; 
+			for (i = 0; i < length; i++)
+				nname += (consonnants[Math.floor(Math.random()*consonnants.length)]
+						 + vowels[Math.floor(Math.random()*vowels.length)]);
+			nname = nname.charAt(0).toUpperCase() + nname.slice(1);
+			name = nname;
+        }
+        document.getElementById('nameOutput').textContent = name;
+    }
+    function copyToClipboard(){
+        const name = document.getElementById('nameOutput').textContent;
+        navigator.clipboard.writeText(name).then(() => {
+            alert('Name copied to clipboard!');
+        });
+    }
+</script>
+</html>
