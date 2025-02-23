@@ -67,32 +67,40 @@
     </div>
 </body>
 <script>
-    const fantasyNames = ["Elrindor", "Silvana", "Galadriel", "Aragorn", "Legolas", "Eldarion", "Morwenna", "Dragenmar", "Eirissel", "Vargran", "Tielia", "Zarton", "Lirelle", "Faendor", "Keldoris"];
-    const scifiNames = ["Zortac", "Neila", "Kyle", "Lyra", "Jax", "Zentaurus 9", "Neira Xel", "Tronex", "Velion-42", "Cyberra", "Argomed", "Silectra", "Drayson Vir", "Mechatron", "Altarius"];
-    const medievalNames = ["Henry", "Margaret", "William", "Eleanor", "Richard", "Godfried", "Reynald", "Isolde", "Wilhelm", "Alistria", "Roland", "Beatrice", "Ludwig", "Gisela", "Otto"];
-    function getRandomElement(array){
-        return array[Math.floor(Math.random() * array.length)];
-    }
     function generateName(){
         const style = document.getElementById('style').value;
         let name;
         if (style === 'fantasy'){
-            name = getRandomElement(fantasyNames);
+            prefix = ['El', 'Sil', 'Sel', 'Gal', 'Ar', 'Ar', 'Leg', 'Mor', 'Dr', 'Er', 'Ag', 'Var', 'Ti', 'Li', 'Kel'];
+            root = ['a', 'i', 'ala', 'e', 'ago', 'ego', 'ola', 'we', 'o', 'elle', 'endo'];
+            ending = ['rion', 'lien', 's', 'ras', 'gran', 'lia', 'dor', 'ris'];
+
+			nname = "";
+			nname += (prefix[Math.floor(Math.random()*prefix.length)] + root[Math.floor(Math.random()*root.length)] + ending[Math.floor(Math.random()*ending.length)]);
+			name = nname;
         }else if (style === 'scifi'){
-            name = getRandomElement(scifiNames);
+            prefix = ['Zor', 'Neuro', 'Cyber', 'Mecha', 'Zenta', 'Delta', 'Tron', 'Optimu', 'Argo', 'Alter', 'Spe'];
+            root = ['- cyborg', 'gos', 'rius', ' - xel', ' - ego', 'ego', 'ra', 'ctra', 'med', 'tium', 'tron', 'tion'];
+            ending = [' Ultra', '', '', '', ' 9000', ' 01', ' N95', ' Alpha', '', '', '', '', '', '', '', ' X', ' 2', ' 5', ' 7', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''];
+
+			nname = "";
+            nname += (prefix[Math.floor(Math.random()*prefix.length)] + root[Math.floor(Math.random()*root.length)] + ending[Math.floor(Math.random()*ending.length)]);
+			name = nname;
         }else if (style === 'medieval'){
-            name = getRandomElement(medievalNames);
+            prefix = ['Ma', 'Wili', 'Andre', 'Wi', 'Ali', 'Bea', 'Rola', 'Lu', 'Gise', 'A', 'O'];
+            root = ['ria', 'us', 'chandra', 'helm', 'stria', 'nd', 'lya', 'ctrice', 'tto'];
+
+			nname = "";
+			nname += (prefix[Math.floor(Math.random()*prefix.length)] + root[Math.floor(Math.random()*root.length)]);
+			name = nname;
         }else if (style === 'random'){
-            consonnants = [
-				'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 
-				'n', 'p', 'r', 's', 't', 'th', 'v', 'x', 'z'];
-			vowels = ['a', 'au', 'e', 'i', 'o', 'ou', 'u', 'y'];
+            consonnants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'th', 'v', 'x', 'z', 'sh', 'ch'];
+			vowels = ['a', 'au', 'e', 'i', 'o', 'ou', 'u', 'y', 'oo', 'ay'];
 
 			nname = "";
 			length = Math.floor(Math.random() * 3) + 2; 
 			for (i = 0; i < length; i++)
-				nname += (consonnants[Math.floor(Math.random()*consonnants.length)]
-						 + vowels[Math.floor(Math.random()*vowels.length)]);
+				nname += (consonnants[Math.floor(Math.random()*consonnants.length)] + vowels[Math.floor(Math.random()*vowels.length)]);
 			nname = nname.charAt(0).toUpperCase() + nname.slice(1);
 			name = nname;
         }
